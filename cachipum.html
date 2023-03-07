@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Juego de Piedra, Papel o Tijeras</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+
+<style>   
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+ 
+body{
+
+  font-family: 'Bebas Neue', cursive;
+  background-image: url(https://cooperativa.cl/noticias/site/artic/20140503/imag/foto_0000000120140503093014.jpg);
+}
+
+footer{
+text-decoration: none;
+
+}
+
+#rock:hover{  background-color: green; }
+ #rock:active{background-color:gold}
+
+ #paper:hover{  background-color: green; }
+ #paper:active{background-color:gold}
+
+ #scissors:hover{  background-color: green; }
+ #scissors:active{background-color:gold}
+
+
+ #resultado {
+    padding: 20px;
+    font-size: 3em;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 5px solid black;
+    border-radius: 10px;
+    background-color: white;
+    width: 30%;
+    margin: 0 auto;
+
+  }
+
+</style>
+<body>
+
+
+  <div class=" text-center container my-5 ">
+    <h1 class="" >Piedra, Papel o Tijeras Contra tu PC</h1>
+    <div class="row">
+      <div class="col">
+        <button id="rock" class="btn btn-lg btn-primary">Piedra</button>
+      </div>
+      <div class="col">
+        <button id="paper" class="btn btn-lg btn-primary">Papel</button>
+      </div>
+      <div class="col">
+        <button id="scissors" class="btn btn-lg btn-primary">Tijeras</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="resultado" class="text-center mt-5"></div>
+  
+<footer class="text-center">
+  <h4>Instrucciones para el Juego de Piedra, Papel o Tijera</h4>
+    
+      <li>El juego es para un jugador.</li>
+      <li>Cada jugador elige uno de los siguientes elementos: piedra, papel o tijera.</li>
+      <li>La piedra gana a las tijeras, las tijeras ganan al papel, y el papel gana a la piedra.</li>
+      <li>El jugador que gana obtiene un punto.</li>
+      <li>El primer jugador que llegue a 3 puntos es el ganador.</li>
+    
+  
+
+
+
+</footer>
+<script>
+  const choices = ['rock', 'paper', 'scissors'];
+  
+  const computerPlay = () => {
+    return choices[Math.floor(Math.random() * choices.length)];
+  }
+  
+  const playRound = (playerSelection, computerSelection) => {
+  if (playerSelection === computerSelection) {
+    return 'Empate';
+  } else if (playerSelection === 'rock' && computerSelection === 'scissors' ||
+             playerSelection === 'paper' && computerSelection === 'rock' ||
+             playerSelection === 'scissors' && computerSelection === 'paper') {
+    return 'Ganaste';
+  } else {
+    return 'Perdiste';
+  }
+}
+  
+  const buttons = document.querySelectorAll('button');
+  
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const playerSelection = button.id;
+      const computerSelection = computerPlay();
+      const result = playRound(playerSelection, computerSelection);
+      
+    });
+  });
+
+  buttons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const playerSelection = button.id;
+    const computerSelection = computerPlay();
+    const result = playRound(playerSelection, computerSelection);
+    const resultadoElement = document.getElementById('resultado');
+    resultadoElement.textContent = result;
+  });
+});
+    
+  
+
+   </script>
+</body>
+</html>
